@@ -306,7 +306,7 @@ form.addEventListener("submit", async (e) => {
     zipcode: document.querySelector('input[placeholder="รหัสไปรษณีย์"]')?.value || ""
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwKIUCcDULfqVSv94q6bfJl3mLIlhyBR0pvAnjGVs-NkDDr9HkU5Zzdbsf-JctSMqybUQ/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbwG4SjKATiJahqMTF7cpXpRywYnpJ0wzs3VtRZbYLZSuVON4ep8DQdor54lwlR2e2ejzA/exec", {
     method: "POST",
     body: JSON.stringify(data)
   });
