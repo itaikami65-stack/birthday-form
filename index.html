@@ -272,20 +272,54 @@
 
   </div>
 
-  <script>
-    const radios = document.querySelectorAll('input[name="postcard"]');
-    const addressSection = document.getElementById('addressSection');
+<script>
 
-    radios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        if (radio.value === 'yes' && radio.checked) {
-          addressSection.style.display = 'block';
-        } else if (radio.value === 'no' && radio.checked) {
-          addressSection.style.display = 'none';
-        }
-      });
-    });
-  </script>
+const radios = document.querySelectorAll('input[name="postcard"]');
+const addressSection = document.getElementById('addressSection');
+
+radios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if (radio.value === 'yes' && radio.checked) {
+      addressSection.style.display = 'block';
+    } else {
+      addressSection.style.display = 'none';
+    }
+  });
+});
+
+const form = document.getElementById("birthdayForm");
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const data = {
+    name: document.querySelector('input[placeholder="กรอกชื่อของคุณ"]').value,
+    contact: document.querySelector('input[placeholder="Discord / X(Twitter) / Facebook / Email"]').value,
+    message: document.querySelector('textarea[placeholder="พิมพ์ข้อความอวยพรที่นี่..."]').value,
+    wantPostcard: document.querySelector('input[name="postcard"]:checked').value,
+
+    receiverName: document.querySelector('input[placeholder="ชื่อผู้รับ"]')?.value || "",
+    address: document.querySelector('textarea[placeholder="กรอกที่อยู่โดยละเอียด"]')?.value || "",
+    district: document.querySelector('input[placeholder="ตำบล / แขวง"]')?.value || "",
+    province: document.querySelector('input[placeholder="จังหวัด"]')?.value || "",
+    zipcode: document.querySelector('input[placeholder="รหัสไปรษณีย์"]')?.value || ""
+  };
+
+  await fetch("https://script.google.com/macros/s/AKfycbwKIUCcDULfqVSv94q6bfJl3mLIlhyBR0pvAnjGVs-NkDDr9HkU5Zzdbsf-JctSMqybUQ/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert("ส่งฟอร์มเรียบร้อยแล้ว ✨");
+
+  form.reset();
+
+  addressSection.style.display = "none";
+
+});
+
+</script>
 
 </body>
 </html>
